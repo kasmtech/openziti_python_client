@@ -1,0 +1,2 @@
+openziti-edge-client @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_client
+openziti-edge-management @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_management

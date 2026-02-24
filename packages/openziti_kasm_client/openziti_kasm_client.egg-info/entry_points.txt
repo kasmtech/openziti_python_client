@@ -1,0 +1,2 @@
+[console_scripts]
+ziti-kasm-provision-identity2 = openziti_kasm_client.provision_identity2:main
