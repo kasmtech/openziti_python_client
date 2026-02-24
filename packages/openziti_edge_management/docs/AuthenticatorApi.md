@@ -1,0 +1,837 @@
+# openziti_edge_management.AuthenticatorApi
+
+All URIs are relative to *https://demo.ziti.dev/edge/management/v1*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_authenticator**](AuthenticatorApi.md#create_authenticator) | **POST** /authenticators | Creates an authenticator
+[**delete_authenticator**](AuthenticatorApi.md#delete_authenticator) | **DELETE** /authenticators/{id} | Delete an Authenticator
+[**detail_authenticator**](AuthenticatorApi.md#detail_authenticator) | **GET** /authenticators/{id} | Retrieves a single authenticator
+[**list_authenticators**](AuthenticatorApi.md#list_authenticators) | **GET** /authenticators | List authenticators
+[**patch_authenticator**](AuthenticatorApi.md#patch_authenticator) | **PATCH** /authenticators/{id} | Update the supplied fields on an authenticator
+[**re_enroll_authenticator**](AuthenticatorApi.md#re_enroll_authenticator) | **POST** /authenticators/{id}/re-enroll | Reverts an authenticator to an enrollment
+[**request_extend_all_cert_authenticators**](AuthenticatorApi.md#request_extend_all_cert_authenticators) | **POST** /identities/{id}/request-extend | Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.
+[**request_extend_authenticator**](AuthenticatorApi.md#request_extend_authenticator) | **POST** /authenticators/{id}/request-extend | Indicate a certificate authenticator should be extended and optionally key rolled on next authentication.
+[**update_authenticator**](AuthenticatorApi.md#update_authenticator) | **PUT** /authenticators/{id} | Update all fields on an authenticator
+
+
+# **create_authenticator**
+> CreateEnvelope create_authenticator(authenticator)
+
+Creates an authenticator
+
+Creates an authenticator for a specific identity. Requires admin access.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.authenticator_create import AuthenticatorCreate
+from openziti_edge_management.models.create_envelope import CreateEnvelope
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    authenticator = openziti_edge_management.AuthenticatorCreate() # AuthenticatorCreate | A Authenticator create object
+
+    try:
+        # Creates an authenticator
+        api_response = api_instance.create_authenticator(authenticator)
+        print("The response of AuthenticatorApi->create_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->create_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authenticator** | [**AuthenticatorCreate**](AuthenticatorCreate.md)| A Authenticator create object | 
+
+### Return type
+
+[**CreateEnvelope**](CreateEnvelope.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The create request was successful and the resource has been added at the following location |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**400** | The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error&#39;s code, message, and cause fields can be inspected for further information |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_authenticator**
+> Empty delete_authenticator(id)
+
+Delete an Authenticator
+
+Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
+Requires admin access.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.empty import Empty
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+
+    try:
+        # Delete an Authenticator
+        api_response = api_instance.delete_authenticator(id)
+        print("The response of AuthenticatorApi->delete_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->delete_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+
+### Return type
+
+[**Empty**](Empty.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The delete request was successful and the resource has been removed |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**400** | The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error&#39;s code, message, and cause fields can be inspected for further information |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **detail_authenticator**
+> DetailAuthenticatorEnvelope detail_authenticator(id)
+
+Retrieves a single authenticator
+
+Retrieves a single authenticator by id. Requires admin access.
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.detail_authenticator_envelope import DetailAuthenticatorEnvelope
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+
+    try:
+        # Retrieves a single authenticator
+        api_response = api_instance.detail_authenticator(id)
+        print("The response of AuthenticatorApi->detail_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->detail_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+
+### Return type
+
+[**DetailAuthenticatorEnvelope**](DetailAuthenticatorEnvelope.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A singular authenticator resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_authenticators**
+> ListAuthenticatorsEnvelope list_authenticators(limit=limit, offset=offset, filter=filter)
+
+List authenticators
+
+Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
+This endpoint requires admin access.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.list_authenticators_envelope import ListAuthenticatorsEnvelope
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    limit = 56 # int |  (optional)
+    offset = 56 # int |  (optional)
+    filter = 'filter_example' # str |  (optional)
+
+    try:
+        # List authenticators
+        api_response = api_instance.list_authenticators(limit=limit, offset=offset, filter=filter)
+        print("The response of AuthenticatorApi->list_authenticators:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->list_authenticators: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**|  | [optional] 
+ **offset** | **int**|  | [optional] 
+ **filter** | **str**|  | [optional] 
+
+### Return type
+
+[**ListAuthenticatorsEnvelope**](ListAuthenticatorsEnvelope.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A list of authenticators |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**400** | The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error&#39;s code, message, and cause fields can be inspected for further information |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_authenticator**
+> Empty patch_authenticator(id, authenticator)
+
+Update the supplied fields on an authenticator
+
+Update the supplied fields on an authenticator by id. Requires admin access.
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.authenticator_patch import AuthenticatorPatch
+from openziti_edge_management.models.empty import Empty
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+    authenticator = openziti_edge_management.AuthenticatorPatch() # AuthenticatorPatch | An authenticator patch object
+
+    try:
+        # Update the supplied fields on an authenticator
+        api_response = api_instance.patch_authenticator(id, authenticator)
+        print("The response of AuthenticatorApi->patch_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->patch_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+ **authenticator** | [**AuthenticatorPatch**](AuthenticatorPatch.md)| An authenticator patch object | 
+
+### Return type
+
+[**Empty**](Empty.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The patch request was successful and the resource has been altered |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**400** | The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error&#39;s code, message, and cause fields can be inspected for further information |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **re_enroll_authenticator**
+> CreateEnvelope re_enroll_authenticator(id, re_enroll)
+
+Reverts an authenticator to an enrollment
+
+Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the 
+created enrollment record response is provided and the source authenticator record will be deleted. The 
+enrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT
+authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.create_envelope import CreateEnvelope
+from openziti_edge_management.models.re_enroll import ReEnroll
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+    re_enroll = openziti_edge_management.ReEnroll() # ReEnroll | A reEnrollment request
+
+    try:
+        # Reverts an authenticator to an enrollment
+        api_response = api_instance.re_enroll_authenticator(id, re_enroll)
+        print("The response of AuthenticatorApi->re_enroll_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->re_enroll_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+ **re_enroll** | [**ReEnroll**](ReEnroll.md)| A reEnrollment request | 
+
+### Return type
+
+[**CreateEnvelope**](CreateEnvelope.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The create request was successful and the resource has been added at the following location |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **request_extend_all_cert_authenticators**
+> Empty request_extend_all_cert_authenticators(id, request_extend_authenticator)
+
+Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.
+
+Allows all certificate authenticators on an identity to be flagged for early extension and optionally private 
+key rolling. Connecting clients will receive flags in their API Session indicating that an early extension is 
+request and a hint on whether private keys should be rolled. Clients that do not support extension or cannot 
+roll keys may ignore one or both flags.
+
+If this request is made against an identity with zero certificate authenticators, a 403 will be returned.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.empty import Empty
+from openziti_edge_management.models.request_extend_authenticator import RequestExtendAuthenticator
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+    request_extend_authenticator = openziti_edge_management.RequestExtendAuthenticator() # RequestExtendAuthenticator | A request to flag a certificate authenticator for early extension/key rolling.
+
+    try:
+        # Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.
+        api_response = api_instance.request_extend_all_cert_authenticators(id, request_extend_authenticator)
+        print("The response of AuthenticatorApi->request_extend_all_cert_authenticators:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->request_extend_all_cert_authenticators: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+ **request_extend_authenticator** | [**RequestExtendAuthenticator**](RequestExtendAuthenticator.md)| A request to flag a certificate authenticator for early extension/key rolling. | 
+
+### Return type
+
+[**Empty**](Empty.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Base empty response |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**403** | The request could not be completed and will never complete due to unchangeable state or conflicts. |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **request_extend_authenticator**
+> Empty request_extend_authenticator(id, request_extend_authenticator)
+
+Indicate a certificate authenticator should be extended and optionally key rolled on next authentication.
+
+Allows a certificate authenticator to be flagged for early extension and optionally private key rolling. 
+Connecting clients will receive flags in their API Session indicating that an early extension is request and
+a hint on whether private keys should be rolled. Clients that do not support extension or cannot roll keys
+may ignore one or both flags.
+
+If this request is made against a non-certificate based authenticator, it will return a 403-forbidden error.
+
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.empty import Empty
+from openziti_edge_management.models.request_extend_authenticator import RequestExtendAuthenticator
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+    request_extend_authenticator = openziti_edge_management.RequestExtendAuthenticator() # RequestExtendAuthenticator | A request to flag a certificate authenticator for early extension/key rolling.
+
+    try:
+        # Indicate a certificate authenticator should be extended and optionally key rolled on next authentication.
+        api_response = api_instance.request_extend_authenticator(id, request_extend_authenticator)
+        print("The response of AuthenticatorApi->request_extend_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->request_extend_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+ **request_extend_authenticator** | [**RequestExtendAuthenticator**](RequestExtendAuthenticator.md)| A request to flag a certificate authenticator for early extension/key rolling. | 
+
+### Return type
+
+[**Empty**](Empty.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Base empty response |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**403** | The request could not be completed and will never complete due to unchangeable state or conflicts. |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_authenticator**
+> Empty update_authenticator(id, authenticator)
+
+Update all fields on an authenticator
+
+Update all fields on an authenticator by id. Requires admin access.
+
+### Example
+
+* Api Key Authentication (ztSession):
+* OAuth Authentication (oauth2):
+
+```python
+import openziti_edge_management
+from openziti_edge_management.models.authenticator_update import AuthenticatorUpdate
+from openziti_edge_management.models.empty import Empty
+from openziti_edge_management.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://demo.ziti.dev/edge/management/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openziti_edge_management.Configuration(
+    host = "https://demo.ziti.dev/edge/management/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ztSession
+configuration.api_key['ztSession'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ztSession'] = 'Bearer'
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openziti_edge_management.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openziti_edge_management.AuthenticatorApi(api_client)
+    id = 'id_example' # str | The id of the requested resource
+    authenticator = openziti_edge_management.AuthenticatorUpdate() # AuthenticatorUpdate | An authenticator put object
+
+    try:
+        # Update all fields on an authenticator
+        api_response = api_instance.update_authenticator(id, authenticator)
+        print("The response of AuthenticatorApi->update_authenticator:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticatorApi->update_authenticator: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The id of the requested resource | 
+ **authenticator** | [**AuthenticatorUpdate**](AuthenticatorUpdate.md)| An authenticator put object | 
+
+### Return type
+
+[**Empty**](Empty.md)
+
+### Authorization
+
+[ztSession](../README.md#ztSession), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The update request was successful and the resource has been altered |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**400** | The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error&#39;s code, message, and cause fields can be inspected for further information |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**401** | The supplied session does not have the correct access rights to request this resource |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**404** | The requested resource does not exist |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**429** | The resource requested is rate limited and the rate limit has been exceeded |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+**503** | The request could not be completed due to the server being busy or in a temporarily bad state |  * WWW-Authenticate - Denotes different type of security token related information <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

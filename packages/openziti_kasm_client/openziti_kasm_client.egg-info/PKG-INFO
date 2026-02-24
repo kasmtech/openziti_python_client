@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: openziti_kasm_client
+Version: 0.1.0
+Summary: Session-managed wrapper and provisioning workflow for OpenZiti clients
+Author: Kasm
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: openziti-edge-client @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_client
+Requires-Dist: openziti-edge-management @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_management
+
+# openziti-kasm-client
+
+Wrapper and workflows around generated OpenZiti Python SDKs.

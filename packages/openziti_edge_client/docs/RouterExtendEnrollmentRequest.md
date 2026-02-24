@@ -1,0 +1,30 @@
+# RouterExtendEnrollmentRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**cert_csr** | **str** |  | 
+**server_cert_csr** | **str** |  | 
+
+## Example
+
+```python
+from openziti_edge_client.models.router_extend_enrollment_request import RouterExtendEnrollmentRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RouterExtendEnrollmentRequest from a JSON string
+router_extend_enrollment_request_instance = RouterExtendEnrollmentRequest.from_json(json)
+# print the JSON string representation of the object
+print(RouterExtendEnrollmentRequest.to_json())
+
+# convert the object into a dict
+router_extend_enrollment_request_dict = router_extend_enrollment_request_instance.to_dict()
+# create an instance of RouterExtendEnrollmentRequest from a dict
+router_extend_enrollment_request_from_dict = RouterExtendEnrollmentRequest.from_dict(router_extend_enrollment_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

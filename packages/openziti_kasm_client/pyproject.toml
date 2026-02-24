@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openziti_kasm_client"
+version = "0.1.0"
+description = "Session-managed wrapper and provisioning workflow for OpenZiti clients"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Kasm" }
+]
+dependencies = [
+  "openziti-edge-client @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_client",
+  "openziti-edge-management @ git+https://github.com/kasmtech/openziti_python_client.git@develop#subdirectory=packages/openziti_edge_management",
+]
+
+[project.scripts]
+ziti-kasm-provision-identity2 = "openziti_kasm_client.provision_identity2:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["openziti_kasm_client*"]
